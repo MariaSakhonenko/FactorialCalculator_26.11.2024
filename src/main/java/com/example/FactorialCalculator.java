@@ -3,6 +3,7 @@ package com.example;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class FactorialCalculator
 {
@@ -24,5 +25,39 @@ public class FactorialCalculator
         }
 
         return factorials;
+    }
+
+    public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a natural number greater than zero: ");
+        
+        int n = 0;
+        
+        try 
+        {
+            n = Integer.parseInt(scanner.nextLine());
+        } 
+        catch (NumberFormatException e) 
+        {
+            System.out.println("Invalid input. Please enter a natural number greater than zero.");
+            return;
+        }
+
+        try 
+        {
+            FactorialCalculator calculator = new FactorialCalculator();
+            List<BigInteger> factorials = calculator.calculateFactorials(n);
+            System.out.println("Factorials from 1 to " + n + ":");
+            factorials.forEach(System.out::println);
+        } 
+        catch (IllegalArgumentException e) 
+        {
+            System.out.println(e.getMessage());
+        } 
+        finally 
+        {
+            scanner.close();
+        }
     }
 }
